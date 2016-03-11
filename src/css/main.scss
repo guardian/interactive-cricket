@@ -1,3 +1,26 @@
 @import "fonts";
 @import "mq";
+@import "palette";
 @import "general";
+
+@import "modules/_common";
+
+
+$EN:#4169E1;
+$AU:#e0ac28;//008751;
+
+$PK:#006600;
+$SL:#8D2029;
+$IN:#138808;
+
+$IE:#00DC00;
+$OM:#DB161B;
+
+$margin-left: 65px;
+$margin-right: 30px;
+
+@import "modules/_match-chart";
+@import "modules/_partnerships-chart";
+@import "modules/_partnerships-timeline";
+@import "modules/_wickets-timeline";
+@import "modules/_tooltip";

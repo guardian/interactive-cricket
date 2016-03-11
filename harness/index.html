@@ -9,14 +9,14 @@
     <body>
 
         <!-- Use the same figure elm as NGW -->
-        <figure class="element-interactive interactive"></figure>
+        <figure class="element-interactive interactive-container"></figure>
 
         <!-- Libs -->
         <script src="curl.js"></script>
 
         <!-- Simulate boot.js -->
         <script>
-          var el = document.querySelector('.interactive');
+          var el = document.querySelector('.interactive-container');
           require = curl;
           curl(['boot.js'], function(app) {
                 app.boot(el);
