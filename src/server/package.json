@@ -1,0 +1,28 @@
+{
+  "name": "PA-cricket-data",
+  "version": "0.0.1",
+  "description": "Getting cricket data from PA api",
+  "author": "carlo carlo.zapponi@theguardian.com",
+  "contributors": [],
+  
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PROJECT"
+  },
+  "bugs": {
+    "url": "https://github.com/nodejitsu/PROJECT/issues"
+  },
+  "keywords": [
+    "cricket"
+  ],
+  "dependencies": {
+    "array.prototype.find": "*",
+    "request": "*",
+    "express": "*",
+    "cors": "*"
+  },
+  "devDependencies": {
+    
+  },
+  "license": "MIT"
+}

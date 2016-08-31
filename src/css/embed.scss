@@ -1,4 +1,8 @@
 @import "fonts";
+@import "palette";
+@import "mq";
+
+@import "modules/_common";
 
 html,
 body {
@@ -8,5 +12,20 @@ body {
     padding: 0;
 }
 
+$margin-left: 0;//65px;//65px;
+$margin-right: 0;//40px;
+
+@import "general";
+
 .interactive-embed {
+	
 }
+
+
+
+@import "modules/_match-chart";
+@import "modules/_smallchart";
+@import "modules/_partnerships-chart";
+@import "modules/_partnerships-timeline";
+@import "modules/_wickets-timeline";
+@import "modules/_tooltip";

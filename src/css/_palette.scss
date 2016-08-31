@@ -3,3 +3,87 @@
 @function colour($name) {
     @return map-get($pasteup-palette, $name);
 }
+
+$EN:#4169E1;
+$AU:#e0ac28;//008751;
+$PK:#006600;
+$SL:#8D2029;
+$IN:#FF9933;
+$IE:#00DC00;
+$OM:#DB161B;
+$ZW:#FFD200;
+$SC:#1B71BD;
+$HK:#DE2910;
+$AF:#009900;
+$BD:#006A4E;
+$NL:#FF4F00;
+$NZ:#000;
+$WI:#790D1A;
+$ZA:#007A4D;
+
+
+$countries-list: EN, AU, PK, IN, OM, IE, ZW, SC, SL, HK, AF, BD, NL, NZ, WI, ZA;
+$colors-list: $EN, $AU, $PK, $IN, $OM, $IE, $ZW, $SC, $SL, $HK, $AF, $BD, $NL, $NZ, $WI, $ZA;
+@each $current-color in $colors-list {
+    $i: index($colors-list, $current-color);
+    
+    .match.#{nth($countries-list, $i)} svg {
+        border-bottom-color:$current-color;
+    }
+
+    
+    .bowler.#{nth($countries-list, $i)} {
+        .wicket {
+            > div {
+                background-color: $current-color;
+            }
+        }
+    }
+
+    path.inn-bg.#{nth($countries-list, $i)} {
+        fill:$current-color;
+    }
+
+    .#{nth($countries-list, $i)} {
+        line {
+            stroke:$current-color;
+        }
+        circle {
+            fill:$current-color;
+        }
+
+        g.partnership {
+            path.rr {
+                fill:$current-color;
+            }
+        }
+
+        g.player {
+            rect {
+                fill:$current-color;
+            }
+        }
+        
+    }
+
+    .match-title {
+    	h1 {
+    		b.#{nth($countries-list, $i)} {
+    			border-bottom-color:$current-color;
+    		}
+    	}
+    }
+
+    .small-chart {
+    	.innings.#{nth($countries-list, $i)} {
+    		line.runs {
+    			stroke:$current-color;
+    		}
+    		path.runs-bg,
+    		text.runs {
+    			fill:$current-color;	
+    		}
+    	}
+    }
+
+}

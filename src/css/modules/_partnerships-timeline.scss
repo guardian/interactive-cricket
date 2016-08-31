@@ -1,0 +1,253 @@
+.partnerships-timeline {
+	
+	@include fs-textSans(1);
+	font-size: 12px;
+	line-height: 8px; //workaround to keep the height of the container = height of svg
+	width:100%;
+	overflow:visible;
+	position:relative;
+
+	.timeline {
+		overflow: visible;
+		height: 100%;
+		margin-left: $margin-left;
+
+		.innings {
+			overflow: visible;
+			width: 100%;
+			height: 100%;
+			//background: rgba(0,0,0,0.15);
+		}
+	}
+
+	.profiles {
+		
+		position: relative;
+		float:left;
+		width:0px;
+		overflow: visible;
+		
+		//border-right:1px solid #ddd;
+
+		.profile {
+			text-align: center;
+			//width:0;
+			height:25px;//32px;
+			overflow: visible;
+			position: relative;
+			top:3px;
+			
+			//padding-right:5px;
+			.pic {
+				left:-110px;
+				text-align: right;
+				position: absolute;
+				width:110px;
+				height:25px;//32px;
+				//background-color:rgba(0,0,0,0.1);
+
+				h4 {
+					margin:0;
+					padding:0;
+					@include fs-textSans(1);
+					font-size: 12px;
+					font-weight: normal;
+					line-height: 25px;//27px;
+					//position:absolute;
+					//right:18px;
+					text-align: right;
+					color:#767676;
+					text-transform: capitalize;
+					float: right;
+					margin-right:5px;
+					margin-top:-2px;
+				}
+				img.picture {
+					float:right;
+					border-radius:50%;
+					width:25px;
+					border:2px solid colour(neutral-4);
+					margin-right:5px;
+				}
+			}
+			.performance {
+				position: absolute;
+
+				div.scores {
+					display: none;
+					margin:0;
+					padding:0;
+					@include fs-textSans(1);
+					font-size: 12px;
+					font-weight: normal;
+					line-height: 25px;//27px;
+					position:absolute;
+					left:5px;
+					color:#767676;
+					text-transform: capitalize;
+
+					
+				}
+
+				span {
+					margin-left:3px;
+					background-color: #ddd;
+					padding:2px 5px;
+					line-height: 25px;
+					border-radius:4px;
+				}
+				
+				span.runs {
+					
+				}
+				span.fours {
+					background-color:#333;
+					color:#fff;
+				}
+				span.sixes {
+					background-color:#333;
+					color:#fff;	
+				}
+			}
+			
+		}
+		.profile.highlight {
+			img.picture {
+				border: 2px solid #000;
+			}
+			h4 {
+				color:#000;
+			}
+		}
+
+
+	}
+
+	
+
+	svg {
+
+		g.player {
+			rect {
+				stroke:none;
+				//fill:#ddd;
+				shape-rendering: crispEdges;
+			}
+			
+			line.runs {
+				stroke:#767676;
+
+			}
+
+			circle.runs {
+				stroke:none;
+				fill:#767676
+			}
+
+			g.cross {
+				line {
+					shape-rendering: crispEdges;
+					stroke:#767676;
+					stroke-opacity:0;
+					stroke-width:1;
+					stroke-dasharray: 4,4;
+				}
+			}
+
+		}
+		g.player.highlight {
+			rect {
+				fill:#333 !important;
+			}
+			g.cross {
+				line {
+					stroke-opacity:1;
+				}
+			}
+		}
+		
+		
+		g.partnerships {
+
+			//.partnership:hover,
+			.partnership.hover {
+				rect.partnership-shadow {
+					fill-opacity:0.5 !important;
+				}
+				rect.partnership-shadow-tall {
+					fill-opacity:0.2 !important;
+				}
+			}
+
+			rect.partnership-shadow {
+				fill-opacity:0.2;
+			}
+			rect.partnership-shadow-tall {
+				fill-opacity:0;
+			}
+			rect.partnership-ux {
+				fill-opacity:0;
+				fill:#000 !important;
+			}
+			g.partnership:nth-child(even) {
+				rect.partnership-shadow {
+					//fill-opacity:0.2;
+				}	
+			}
+			g.partnership path.partnership-connection {
+				stroke:#333;
+				stroke-width: 2;
+				fill:none;
+			}
+			/*
+			.EN g.partnership {
+				rect {
+					fill:$EN;
+				}
+				path {
+					stroke:$EN;
+				}
+			}
+			.AU g.partnership {
+				rect {
+					fill:$AU;
+				}
+				path {
+					stroke:$AU;
+				}
+			}
+
+			.PK g.partnership {
+				rect {
+					fill:$PK;
+				}
+				path {
+					stroke:$PK;
+				}
+			}
+			.SL g.partnership {
+				rect {
+					fill:$SL;
+				}
+				path {
+					stroke:$SL;
+				}
+			}
+			.IN g.partnership {
+				rect {
+					fill:$IN;
+				}
+				path {
+					stroke:$IN;
+				}
+			}
+			*/
+		}
+		
+
+	}
+	
+	
+	
+
+}

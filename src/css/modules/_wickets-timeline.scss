@@ -1,0 +1,223 @@
+.wickets-timeline {
+	
+	@include fs-textSans(1);
+	font-size: 12px;
+	
+	width:100%;
+
+	.timeline {
+		overflow: visible;
+		height: 100%;
+		margin-left: $margin-left;
+		margin-right: $margin-right;
+	}
+
+	.bowlers {
+		
+		position: relative;
+		float:left;
+		width:100%;
+		overflow: visible;
+
+		//background: rgba(255,0,0,0.15);
+		
+		//border-right:1px solid #ddd;
+
+		.bowler {
+			text-align: center;
+			width:100%;
+			height:32px;
+			overflow: visible;
+			position: relative;
+			top:5px;
+
+			@mixin droplines {
+				@for $i from 1 through 10 {
+					&:nth-child(#{$i}) {
+						div.dropline {
+							top: #{$i * (-32) + 14}px;	
+						}
+					}
+				}
+			}
+			@include droplines;
+			//padding-right:5px;
+			.pic {
+				left:0;//-15px;
+				text-align: right;
+				position: absolute;
+
+				h4 {
+					margin:0;
+					padding:0;
+					@include fs-textSans(1);
+					font-size: 12px;
+					font-weight: normal;
+					line-height: 32px;
+					position:absolute;
+					right:5px;//18px;
+					text-align: right;
+					color:#767676;
+					text-transform: capitalize;
+					white-space: nowrap;
+				}
+				img.pic {
+					border-radius:50%;
+					width:25px;
+					border:1px solid #767676;
+				}		
+			}
+			.performance {
+				margin:0;
+				padding:0;
+				@include fs-textSans(1);
+				font-size: 12px;
+				font-weight: normal;
+				line-height: 32px;
+				position:absolute;
+				left:100%;
+				color:#767676;
+				white-space: nowrap;
+				top:0;
+				margin-left:5px;
+			}
+			.wickets {
+				position: relative;
+				height:32px;
+				width: 100%;
+
+				background-color: transparent;
+				background-image: linear-gradient(transparent 50%, rgba(0,0,0,.1) 50%);
+				background-size: 100% 2px;
+				background-repeat: no-repeat;
+				background-position: 0 15px;
+
+				$circle_size: 11px;
+
+				$sub_circle_size: 5px;
+
+				.wicket {
+					
+					position: absolute;
+					overflow: visible;
+					
+					top: (16px - ($circle_size / 2));
+					width: $circle_size - 2;
+					height: $circle_size - 2;
+					
+					margin-left: - $circle_size/2;
+
+					border-radius: $circle_size/2;
+					border:1px solid rgba(0,0,0,0);
+					background-color: transparent;
+
+					div.circle {
+
+						position: absolute;
+						top: ($circle_size / 2 - $sub_circle_size / 2) - 0.5;
+						left: ($circle_size / 2 - $sub_circle_size / 2) - 1;
+						width: $sub_circle_size;
+						height: $sub_circle_size;
+						border-radius: $sub_circle_size / 2;
+						opacity:0.5;	
+					}
+					
+					
+					div.dropline {
+						background-color: transparent;
+						border-left: 1px dashed #767676;
+						width: 1px;
+						right: 3px;
+						bottom: 13px;
+						position: absolute;
+						visibility: hidden;
+					}
+				}
+
+				
+
+				.wicket.hover {
+					border:1px solid rgba(0,0,0,0.5);
+
+					div.circle {
+						opacity:1;
+					}
+					div.dropline {
+						visibility: visible;
+					}
+				}
+
+				
+
+			}
+			
+		}
+		.wicket.highlight {
+			img.pic {
+				border: 2px solid #000;
+			}
+			h4 {
+				color:#000;
+			}
+		}
+		/*
+		.bowler.EN {
+			.wicket {
+				> div {
+					background-color: $EN;
+				}
+			}
+		}
+		.bowler.AU {
+			.wicket {
+				> div {
+					background-color: $AU;
+				}
+			}
+		}
+
+		.bowler.PK {
+			.wicket {
+				> div {
+					background-color: $PK;
+				}
+			}
+		}
+		.bowler.SL {
+			.wicket {
+				> div {
+					background-color: $SL;
+				}
+			}
+		}
+		.bowler.IN {
+			.wicket {
+				> div {
+					background-color: $IN;
+				}
+			}
+		}
+		.bowler.IE {
+			.wicket {
+				> div {
+					background-color: $IE;
+				}
+			}
+		}
+		.bowler.OM {
+			.wicket {
+				> div {
+					background-color: $OM;
+				}
+			}
+		}
+		*/
+
+	}
+
+	svg {
+		border:1px solid #ddd;
+	}
+
+
+}
