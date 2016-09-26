@@ -1,26 +1,28 @@
 .partnerships {
 	overflow: visible;
+		
 	//padding-left:55px;
 	.chart {
 		position: relative;
 		overflow: visible;
+		width:100%;
 		float: left;
-		width: 50%;
-		&.inns2 {
+		@include mq(tablet) {
 			width: 50%;
+			&.inns2 {
+				width: 50%;
+			}
+			&.inns3 {
+				width: 33%;
+			}
+			&.inns4 {
+				width: 25%;
+			}
 		}
-		&.inns3 {
-			width: 33%;
-		}
-		&.inns4 {
-			width: 25%;
-			// border-left:1px solid #ddd;
-			// &[rel='1']{
-			// 	border-left:none;
-			// }
-		}
-
 		//padding-right:50px;
+	}
+	.clear-left {
+		clear: left;	
 	}
 
 	.chart:first-child {
@@ -185,44 +187,4 @@
 			stroke-width:1;
 		}
 	}
-	/*
-	.EN g.partnership {
-		path.rr {
-			fill:$EN;
-		}
-	}
-	.AU g.partnership {
-		path.rr {
-			fill:$AU;
-		}
-	}
-	.PK g.partnership {
-		path.rr {
-			fill:$PK;
-		}
-	}
-	.SL g.partnership {
-		path.rr {
-			fill:$SL;
-		}
-	}
-
-	.IN g.partnership {
-		path.rr {
-			fill:$IN;
-		}
-	}
-
-	.IE g.partnership {
-		path.rr {
-			fill:$IE;
-		}
-	}
-
-	.OM g.partnership {
-		path.rr {
-			fill:$OM;
-		}
-	}
-	*/
 }

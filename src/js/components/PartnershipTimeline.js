@@ -293,7 +293,7 @@ export default function PartnershipTimeline(_innings,options) {
 							patternTransform:"rotate(45 0 0)",
 							patternUnits:"userSpaceOnUse"
 						});
-	console.log("->",defs)
+	//console.log("->",defs)
 
 	pattern.append("line")
 			.attr("x1",0)

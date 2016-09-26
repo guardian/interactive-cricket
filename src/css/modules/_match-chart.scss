@@ -19,7 +19,9 @@
 			display: inline-block;
 		}
 		.match-title {
-			float:left;
+			@include mq(tablet) {
+				float:left;
+			}
 			h1,h2 {
 				margin:0;
 				@include mq(tablet) {

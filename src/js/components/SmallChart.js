@@ -92,7 +92,7 @@ export default function SmallChart(data,options) {
 							}
 						];
 
-						console.log(points,area(points))
+						//console.log(points,area(points))
 
 						return area(points);
 						
