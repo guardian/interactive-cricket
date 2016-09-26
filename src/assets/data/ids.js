@@ -26,5 +26,6 @@ export var pa_ids=[
 		"e9cac089-2db1-5a06-2899-a0c0d38069d8", // SEMI FINAL IN-WI
 		"6e8e56d8-e315-a47c-f5e9-3a34ccf05194", // FINAL WI-EN
 		"f279d612-5475-9e64-0a20-8742bba789dd", //EN - SL test match
-		"501ddbc2-f3d3-8872-f9ca-cd5f0069702e" // SL - AU test match 13 Aug 2016
+		"501ddbc2-f3d3-8872-f9ca-cd5f0069702e", // SL - AU test match 13 Aug 2016
+		"31624f4e-1d8e-1bd4-4dc5-39d0c8a030fe" // IN - NZ 22 Sept 2016
 	]
