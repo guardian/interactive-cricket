@@ -3,6 +3,9 @@ var request = require('request');
 var http = require('http');
 var PORT=8080; 
 
+// TEST MATCH ID 3e4036da-43d4-500d-b836-2a34b2cad8b4
+// ODI MATCH ID caecd328-6d06-2d12-563c-f5071d781a7e
+
 var TEAMS={
 	"a359844f-fc07-9cfa-d4cc-9a9ac0d5d075":{
 		"code":"EN",

@@ -1,7 +1,8 @@
 .small-chart {
 
-	width:100%;
-	height:80px;
+	width:50%;
+	height:50px;
+	float: left;
 
 	@include mq(tablet) {
 		float:left;

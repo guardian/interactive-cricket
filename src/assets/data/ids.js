@@ -27,5 +27,9 @@ export var pa_ids=[
 		"6e8e56d8-e315-a47c-f5e9-3a34ccf05194", // FINAL WI-EN
 		"f279d612-5475-9e64-0a20-8742bba789dd", //EN - SL test match
 		"501ddbc2-f3d3-8872-f9ca-cd5f0069702e", // SL - AU test match 13 Aug 2016
-		"31624f4e-1d8e-1bd4-4dc5-39d0c8a030fe" // IN - NZ 22 Sept 2016
+		"31624f4e-1d8e-1bd4-4dc5-39d0c8a030fe", // IN - NZ 22 Sept 2016
+		"f44b0c69-c7d5-3237-b4f9-6107137db996", //IN-NZ 30 sept 2016
+		"91aa8e34-2db6-8811-b314-c1cae44628aa", // BD-EN ODI 09 oct 2016
+		"daacfe60-d3e4-92ab-3398-5107de262073", // BD-EN ODI 12 oct 2016
+		"56819713-2863-967d-2794-e391cd6424d2" //BD-EN TEST 19 oct 2016
 	]

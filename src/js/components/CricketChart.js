@@ -30,11 +30,15 @@ import {
 	timeFormat
 } from 'd3-time-format'
 
+import scroller from "../lib/scroller.js"
+
 export default function CricketChart(data,options) {
 
 	console.log("CricketChart",data)
 
 	let getTeamInfo = () => {};
+
+	let __scroller=new scroller();
 
 	this.extents;
 	this.startFrom=0;
@@ -44,7 +48,7 @@ export default function CricketChart(data,options) {
 	
 	this.options=options;
 
-	
+	let innings;
 
 	
 
@@ -244,6 +248,8 @@ export default function CricketChart(data,options) {
 		let box=container.node().getBoundingClientRect();
 		let WIDTH=box.width-(LEFT_PADDING+RIGHT_PADDING);//*this.data.innings.length-30*this.data.innings.length;
 
+		console.log("WIDTH",WIDTH)
+
 		//WIDTH=box.width;
 
 		let HEIGHT=200;
@@ -265,7 +271,8 @@ export default function CricketChart(data,options) {
 
 		if(box.width<460) {
 			SMALL_SIZE=true;
-			xscale.domain([0,d3_max(this.match.score,d=>{return d.value.balls})])
+			//xscale.domain([0,d3_max(this.match.score,d=>{return d.value.balls})])
+			xscale.domain([0,d3_max(this.match.innings,d=>{return d.value.balls})])
 		}
 
 		let runscale=scaleLinear().domain([0,this.match.overall.runs]);
@@ -307,11 +314,11 @@ export default function CricketChart(data,options) {
 
 		//return;
 		let prev_team;
-		container
+		innings=container
 			.select(".partnerships")
 				.style("margin-left",LEFT_PADDING+"px")
 				.selectAll("div.chart")
-					.data(SMALL_SIZE?this.match.innings.sort((a,b)=>{
+					/*.data(SMALL_SIZE?this.match.innings.sort((a,b)=>{
 						let first=this.match.innings[0];
 						if(a.value.team==b.value.team) {
 							return (+a.key) - (+b.key)
@@ -321,10 +328,11 @@ export default function CricketChart(data,options) {
 						} else {
 							return 1;
 						}
-					}):this.match.innings)
+					}):this.match.innings)*/
+					.data(this.match.innings)
 					.enter()
 					.append("div")
-						.attr("class","chart inns"+this.data.innings.length)
+						.attr("class","inning chart inns"+this.data.innings.length)
 						.classed("clear-left",d=>{
 							if(!SMALL_SIZE) return false;
 							let is_different=(prev_team && prev_team!=d.value.team);
@@ -399,8 +407,64 @@ export default function CricketChart(data,options) {
 							
 							
 						})
+		let scroll = new scroller();
+
+		scroll.container(container.select(".partnerships"));
+
+		scroll(container.selectAll(".inning"))
+
+		scroll.on("active",function(index){
+			console.log("active",index);
+
+			innings
+				.filter((d,i)=>{
+					return i==index-1;
+				})
+				.classed("active",true);
+
+			innings
+				.filter((d,i)=>{
+					return i!=index-1;
+				})
+				.classed("active",false);
+
+			// innings
+			// 	.classed("active",(d,i)=>{
+			// 		return i<index-1;
+			// 	});
+			// innings
+			// 	.filter((d,i)=>{
+			// 		return i==index-2;
+			// 	})
+			// 	.classed("active",false)
+
+
+
+		})
+		scroll.on("progress",function(index,progress){
+			console.log("progress",index,progress);
+			if(progress>0.58) {
+				innings
+					.filter((d,i)=>{
+						return i===index-1;
+					})
+					.classed("active",true)
+					.classed("going-out",true);
+			}
+			if(progress<=0.58) {
+				innings
+					.filter((d,i)=>{
+						return i===index-1;
+					})
+					.classed("active",true)
+					.classed("going-out",false);
+			}
+		})
+
 	}
 
 	_updateData(data);
 	_buildChart();
+
+
 }

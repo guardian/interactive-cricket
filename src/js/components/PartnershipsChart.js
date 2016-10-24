@@ -44,6 +44,14 @@ export default function PartnershipsChart(innings,options) {
 	////console.log(":::::",238,xscale(238))
 	//console.log("--->",innings.value.innings[innings.value.innings.length-1].ending_over*6,"=",WIDTH)
 
+	let partnership_background=select(options.container)
+									.append("div")
+									.attr("class","partnerships-chart-bg");
+
+	let partnership_chart=select(options.container)
+							.append("div")
+							.attr("class","partnerships-chart");
+
 	var inningsTitle=select(options.container)
 						.append("div")
 						.attr("class","innings-title")
@@ -73,9 +81,8 @@ export default function PartnershipsChart(innings,options) {
 			return inns+(inns===1?"st":"nd")+" Innings";
 		})
 
-	let partnership_chart=select(options.container)
-							.append("div")
-							.attr("class","partnerships-chart");
+
+	
 
 	var inningsOvers=partnership_chart
 						.append("div")

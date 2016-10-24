@@ -24,12 +24,14 @@ System.config({
     "core-js": "npm:core-js@1.2.6",
     "d3-array": "npm:d3-array@1.0.1",
     "d3-collection": "npm:d3-collection@1.0.1",
+    "d3-dispatch": "npm:d3-dispatch@1.0.1",
     "d3-request": "npm:d3-request@1.0.2",
     "d3-scale": "npm:d3-scale@1.0.3",
     "d3-selection": "npm:d3-selection@1.0.2",
     "d3-selection-multi": "npm:d3-selection-multi@1.0.0",
     "d3-shape": "npm:d3-shape@1.0.3",
     "d3-time-format": "npm:d3-time-format@2.0.2",
+    "d3-timer": "npm:d3-timer@1.0.3",
     "guardian/iframe-messenger": "github:guardian/iframe-messenger@master",
     "json": "github:systemjs/plugin-json@0.1.2",
     "reqwest": "github:ded/reqwest@1.1.5",
@@ -135,7 +137,7 @@ System.config({
       "d3-ease": "npm:d3-ease@1.0.1",
       "d3-interpolate": "npm:d3-interpolate@1.1.1",
       "d3-selection": "npm:d3-selection@1.0.2",
-      "d3-timer": "npm:d3-timer@1.0.2"
+      "d3-timer": "npm:d3-timer@1.0.3"
     },
     "npm:https-browserify@0.0.0": {
       "http": "github:jspm/nodelibs-http@1.7.1"
