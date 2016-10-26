@@ -61,6 +61,7 @@ export default function CricketChart(data,options) {
 		let prev_balls=0,
 			prev_team_id,
 			prev_played_balls=0,
+			prev_played_runs=0,
 			prev_runs={};
 
 		prev_runs[this.data.info[0].id]=0;
@@ -87,8 +88,8 @@ export default function CricketChart(data,options) {
 						}),
 						Over:data.innings[+leaves[0].Inns-1].overs,
 						balls:getBalls(data.innings[+leaves[0].Inns-1].overs),
-						prev_inning_played_balls:prev_played_balls,
 						prev_inning_team_id:prev_team_id,
+						prev_inning_played_balls:prev_played_balls,
 						starting_balls:prev_balls,
 						starting_runs:prev_runs[leaves[0].id],
 						runs:d3_extent(leaves,(d)=>{
@@ -131,6 +132,7 @@ export default function CricketChart(data,options) {
 					prev_team_id=leaves[0].id;
 					prev_balls+=stuff.total_balls;
 					prev_played_balls=stuff.total_balls;
+					prev_played_runs=stuff.total_runs;
 					prev_runs[leaves[0].id]+=stuff.total_runs;
 					//////console.log("prev_balls",prev_balls)
 					return stuff;
@@ -143,6 +145,19 @@ export default function CricketChart(data,options) {
 			let info=self.data.innings[i];
 			//console.log(d,info)
 			d.value.wickets=info.wickets;
+
+			
+				d.value.other={
+					runs:d3_sum(self.match.innings
+									.filter((innings)=>(+d.key > +innings.key) && (d.value.id!==innings.value.id)),
+								(innings)=>{
+									return innings.value.total_runs
+					})//,
+					//balls:self.match.innings[i-1].value.total_balls
+				}	
+			
+			
+
 		})
 
 		if(this.match.innings.length<2) {
@@ -348,6 +363,7 @@ export default function CricketChart(data,options) {
 							return is_different;
 						})
 						.attr("rel",(d) => (d.key))
+						.attr("data-index",(d,i)=>i)
 						.each(function(d,i) {
 
 							var partnershipChart;
@@ -359,13 +375,14 @@ export default function CricketChart(data,options) {
 							partnershipChart=new PartnershipsChart(d,{
 								container:this,
 								team_id:d.value.id,
+								index:i,
 								inning: +d.key,
 								extents:self.extents,
 								max_balls:options.max_balls,
 								xscale:xscale,
 								yscale:yscale,
 								margins:margins,
-								target:false,//i>0?(self.match.innings[i-1].value.total_runs+1):null,
+								target:true,//i>0?(self.match.innings[i-1].value.total_runs+1):null,
 								height:HEIGHT,
 								getTeamInfo:self.getTeamInfo,
 								callback:(players) => {

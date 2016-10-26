@@ -1,6 +1,9 @@
 .partnerships {
 	overflow: visible;
 	float:left;
+
+	transform:translate3d(0px,0px,0px);
+	
 	//padding-left:55px;
 	.chart {
 		position: relative;
@@ -140,6 +143,11 @@
 			stroke:#333;
 			stroke-width:1;
 			shape-rendering: crispEdges;
+		}
+		&.clone {
+			position: absolute;
+    		left: -100%;
+    		opacity: 0.5;
 		}
 	}
 	g.partnership {

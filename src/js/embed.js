@@ -5,7 +5,7 @@ import {pa_ids} from '../assets/data/ids.js'
 
 import {
 	json as d3_json
-} from 'd3-fetch';
+} from 'd3-request';
 
 import {
 	max as d3_max
@@ -23,9 +23,10 @@ window.init = function init(el, config) {
     el.innerHTML = embedHTML;
 
     let pa_index=pa_ids.length-1;
-    //console.log(pa_ids)
-    //pa_index=7;
-    d3_json("http://localhost:8080/?match_id="+pa_ids[pa_index]).then((data)=>{
+    
+    //d3_json("http://localhost:8080/?match_id="+pa_ids[pa_index]).then((data)=>{
+    //d3_json(config.assetPath+ "/assets/data/sample.json").then((data)=>{
+    d3_json(config.assetPath+ "/assets/data/sample.json",(data)=>{
     	console.log(data);
 
     	new CricketChart(data,{

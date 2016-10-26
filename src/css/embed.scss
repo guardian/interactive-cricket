@@ -21,7 +21,13 @@ $margin-right: 0;//40px;
 	
 }
 
-
+.fixed-fix {
+    position:fixed;
+    top:-1px; 
+    height:1px; 
+    width:100%; 
+    background:white;
+}
 
 @import "modules/_match-chart";
 @import "modules/_smallchart";

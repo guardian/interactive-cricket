@@ -135,14 +135,26 @@ export default function PartnershipsChart(innings,options) {
 							return (innings.value.total_runs)
 						})*/
 
+	
+					//.attr("width",WIDTH)
 	var svg=partnership_chart
 				.style("width",function(d){
 					return Math.ceil(WIDTH)+"px";
 				})
 				.style("height",(HEIGHT)+"px")
 				.append("svg")
-					//.attr("width",WIDTH)
-					
+
+	if(options.index>0) {
+		let prev_svg=document.querySelector(`div[data-index='${options.index-1}'] .partnerships-chart > svg`);
+		let clone=prev_svg.cloneNode(true);
+		let width=prev_svg.getBoundingClientRect().width;
+		let svg_clone=select(partnership_chart.node().appendChild(clone))
+							.attr("class","clone")
+							.style("left",(-width)+"px")
+							.style("width",(width)+"px")
+
+	}
+	
 
 	var all_innings=svg.append("g")
 					.attr("class","match")
@@ -160,9 +172,6 @@ export default function PartnershipsChart(innings,options) {
 	
 
 	let __innings=all_innings.selectAll("g.innings")
-				//.data(match.innings.filter(function(d,i){
-				//	return i===(options.inning-1);
-				//}))
 				.data([innings])
 				.enter()
 					.append("g")
@@ -170,7 +179,6 @@ export default function PartnershipsChart(innings,options) {
 							return "innings "+options.getTeamInfo(options.team_id).code;
 						})
 						.attr("rel",function(d){
-							//////console.log(d)
 							return d.value.starting_balls;
 						})
 						.attr("transform",function(d){
@@ -219,9 +227,9 @@ export default function PartnershipsChart(innings,options) {
 	if(options.target) {
 		target_runs.append("line")
 				.attr("x1",xscale(0))
-				.attr("y1",yscale(0))
+				.attr("y1",yscale(innings.value.other.runs))
 				.attr("x2",xscale(options.max_balls))
-				.attr("y2",yscale(options.target))
+				.attr("y2",yscale(innings.value.other.runs))
 	}
 					
 	
@@ -372,7 +380,7 @@ export default function PartnershipsChart(innings,options) {
 		}
 	};
 	
-	
+
 
 	this.doStuff=function(partnership) {
 		if(!partnership) {
