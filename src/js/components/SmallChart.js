@@ -27,6 +27,8 @@ export default function SmallChart(data,options) {
 		WIDTH,
 		HEIGHT;
 
+	let innings;
+
 	function builData() {
 		console.log(data);
 	}
@@ -51,7 +53,7 @@ export default function SmallChart(data,options) {
 			yscale=scaleLinear().domain([0,data.overall.runs]).range([HEIGHT-(margins.top+margins.bottom),0]);
 
 
-		let innings=svg.append("g")
+		innings=svg.append("g")
 						.attr("transform",`translate(${margins.left},${margins.top})`)
 						.selectAll("g.innings")
 							.data(data.innings)
@@ -135,6 +137,12 @@ export default function SmallChart(data,options) {
 		
 		
 
+	}
+
+	this.highlight=(index)=>{
+		innings.classed("highlight",(d,i)=>{
+			return i===index;
+		})
 	}
 
 	builData();

@@ -43,14 +43,17 @@ export default function CricketChart(data,options) {
 	this.extents;
 	this.startFrom=0;
 	this.match={};
-
+	let match;
 	this.data=data;
 	
 	this.options=options;
 
 	let innings;
 
-	
+	let matchAnalysis;
+	let smallchart;
+	let partnerships=[];
+	let partnerships_timelines=[];
 
 	
 	let _updateData = (data) => {
@@ -199,6 +202,8 @@ export default function CricketChart(data,options) {
 
 
 		console.log("MATCH",this.match)
+
+		match=this.match;
 		
 		this.data.innings.forEach((inn) => {
 
@@ -245,6 +250,8 @@ export default function CricketChart(data,options) {
 						.attr("id","matches")
 						.html(matchHTML);
 
+		matchAnalysis=container.select(".match-analysis");
+
 		let box=container.node().getBoundingClientRect();
 		let WIDTH=box.width-(LEFT_PADDING+RIGHT_PADDING);//*this.data.innings.length-30*this.data.innings.length;
 
@@ -283,8 +290,9 @@ export default function CricketChart(data,options) {
 
 		xscale.range([0,WIDTH])
 		
-		container.select("div.info")
-					.html(`${data.stage}<br/>${data.round?data.round+"<br/>":""}${timeFormat("%d %B %Y, %H:%M%p")(new Date(data.dateTime))}<br/>${data.venue}`)
+		container
+				.select("div.info")
+				.html(`${data.stage}<br/>${data.round?data.round+"<br/>":""}${timeFormat("%d %B %Y, %H:%M%p")(new Date(data.dateTime))}<br/>${data.venue}`)
 
 		let summary=container.select("div.match-summary")
 
@@ -303,7 +311,7 @@ export default function CricketChart(data,options) {
 		summary.select("div.small-chart")
 				.datum(this.match)
 				.each(function(d){
-					new SmallChart(d,{
+					smallchart=new SmallChart(d,{
 						container:this,
 						getTeamInfo:self.getTeamInfo
 					})
@@ -362,9 +370,10 @@ export default function CricketChart(data,options) {
 								getTeamInfo:self.getTeamInfo,
 								callback:(players) => {
 									partnershipTimeline.doStuff(players);
-									wicketsTimeline.doStuff(players);
+									//wicketsTimeline.doStuff(players);
 								}
 							});
+							partnerships.push(partnershipChart);
 							//return;
 							partnershipTimeline=new PartnershipTimeline(self.match.batters[+d.key-1],{
 								innings:d,
@@ -380,9 +389,10 @@ export default function CricketChart(data,options) {
 								getTeamInfo:self.getTeamInfo,
 								callback:function(players){
 									partnershipChart.doStuff(players);
-									wicketsTimeline.doStuff(players);
+									//wicketsTimeline.doStuff(players);
 								}
 							});
+							partnerships_timelines.push(partnershipChart);
 							return;
 							wicketsTimeline=new WicketsTimeline({bowlers:self.match.bowlers[i],batters:self.match.batters[i]},{
 								innings:d,
@@ -403,30 +413,63 @@ export default function CricketChart(data,options) {
 									});
 								}
 							});
-							
-							
-							
 						})
+		
+		let lineOfTime = container
+							.select("div.line-of-time");
+		lineOfTime
+				.selectAll("div.inning")
+				.data(innings.nodes().map((node,i)=>{
+					
+					let box=node.getBoundingClientRect();
+					console.log(node,box)
+					return {
+						index:i,
+						h:box.height
+					}
+				}).concat([{index:5,h:box.height*0.5}]))
+				.enter()
+				.append("div")
+					.attr("class","inning")
+					.attr("rel",d=>d.index)
+					.style("height",d=>(d.h*2)+"px")
+					.text(d=>d.index)
+
 		let scroll = new scroller();
 
-		scroll.container(container.select(".partnerships"));
+		scroll.container(lineOfTime);
 
-		scroll(container.selectAll(".inning"))
-
+		scroll(lineOfTime.selectAll(".inning"))
+		let current=-1;
+		let fixed=false;
+		let selected_partnership=-1;
 		scroll.on("active",function(index){
-			console.log("active",index);
+			console.log(index);
+			smallchart.highlight(index-1);
+			/*if(current!==index && index>0) {
+				current=index;
+				fixed=true;
+				container
+					.select(".partnerships")
+					.classed("fixed",true)
+					.style("top",(-(index-1)*475)+"px")
+					//.style("margin-top",0)
 
-			innings
-				.filter((d,i)=>{
-					return i==index-1;
-				})
-				.classed("active",true);
+				scroll.resize();
+			}*/
+			
 
-			innings
-				.filter((d,i)=>{
-					return i!=index-1;
-				})
-				.classed("active",false);
+			// innings
+			// 	.filter((d,i)=>{
+			// 		return i==index-1;
+			// 	})
+			// 	.classed("active",true);
+
+			// innings
+			// 	.filter((d,i)=>{
+			// 		return i!=index-1;
+			// 	})
+			// 	.classed("active",false);
 
 			// innings
 			// 	.classed("active",(d,i)=>{
@@ -441,25 +484,55 @@ export default function CricketChart(data,options) {
 
 
 		})
-		scroll.on("progress",function(index,progress){
-			console.log("progress",index,progress);
-			if(progress>0.58) {
-				innings
-					.filter((d,i)=>{
-						return i===index-1;
-					})
-					.classed("active",true)
-					.classed("going-out",true);
+		scroll.on("progress",function(index,progress,y,local_y){
+			//console.log(index,"==",current,"Y",progress,y,local_y,"fixed",fixed)
+
+			if(progress>=0 && progress<0.5 && !fixed && current!==index) {
+				console.log("##### 1")
+				fixed=true;
+				current=index;
+				container
+					.select(".partnerships")
+					.classed("fixed",fixed)
+					.style("top",(-(index-1)*475)+"px")
+					.style("margin-top","0px")
 			}
-			if(progress<=0.58) {
-				innings
-					.filter((d,i)=>{
-						return i===index-1;
-					})
-					.classed("active",true)
-					.classed("going-out",false);
+			if(progress>=0.5 && fixed) {
+				console.log("##### 2")
+				fixed=false;
+				current=index;
+				container
+					.select(".partnerships")
+					.classed("fixed",fixed)
+					.style("margin-top",((index)*475)+"px")
+					.style("top","0px")
 			}
+			if(progress<0.5 && !fixed && current===index) {
+				console.log("##### 3")
+				fixed=true;
+				current=index;
+				container
+					.select(".partnerships")
+					.classed("fixed",fixed)
+					.style("top",(-(index-1)*475)+"px")
+					.style("margin-top","0px")	
+			}
+
+			if(progress>=0 && progress<0.5) {
+				let value=Math.floor((progress*2)*(match.innings[index-1].value.innings.length));
+				if(selected_partnership!==value) {
+					console.log(progress,value)
+
+					let partnership=match.innings[index-1].value.innings[value];
+					console.log(partnership)
+					
+					selected_partnership=value;
+					partnerships_timelines[index-1].highlightPartnership(partnership);
+				}
+			}
+
 		})
+		
 
 	}
 

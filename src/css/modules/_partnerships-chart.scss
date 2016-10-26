@@ -1,6 +1,6 @@
 .partnerships {
 	overflow: visible;
-		
+	float:left;
 	//padding-left:55px;
 	.chart {
 		position: relative;
@@ -75,10 +75,14 @@
 	margin-left:$margin-left;
 	padding-left:5px;
 	width:50px;
-	text-align:right;
+	right:-51px;
 	bottom:0;
-	right:0;
-	padding-right:5px;
+	
+	@include mq(tablet) {
+		right:0;
+		padding-right:5px;
+		text-align:right;	
+	}
 	
 }
 .innings-runs {
@@ -91,10 +95,13 @@
 	margin-left:$margin-left;
 	padding-left:5px;
 	width:40px;
-	right:0;
-	padding-right:5px;
-	text-align:right;
-	//padding-left: $margin-left;
+	right:-41px;
+	
+	@include mq(tablet) {
+		right:0;
+		padding-right:5px;
+		text-align:right;	
+	}
 }
 .innings-runs.smaller {
 	font-size:11px;
@@ -202,21 +209,26 @@
 		}
 	}
 }
-
+$top:50px;
+.partnerships.fixed {
+	position: fixed;
+	top:$top;
+}
 .inning.active {
-	.innings-title {
+	
+	/* .innings-title {
 		position: fixed;
-		top:0;
+		top:$top;
 		z-index: 999999;
 	}
 	.partnerships-chart {
 		position: fixed;
-		top:0;
+		top:$top;
 		z-index: 99999;
 	}
 	.partnerships-chart-bg {
 		position: fixed;
-		top:0;
+		top:$top;
 		z-index: 999;
 	}
 	.partnerships-timeline {
@@ -238,5 +250,5 @@
 			bottom:0;
 			top:auto;
 		}
-	}
+	} */
 }

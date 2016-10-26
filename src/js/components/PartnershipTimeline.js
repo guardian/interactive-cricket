@@ -154,8 +154,8 @@ export default function PartnershipTimeline(_innings,options) {
 		player
 			.classed("highlight",false);
 
-		tooltipPlayer.hide();
-		tooltipPartnership.hide();
+		//tooltipPlayer.hide();
+		//tooltipPartnership.hide();
 
 		if(!partnership) {
 			return;
@@ -184,8 +184,8 @@ export default function PartnershipTimeline(_innings,options) {
 		}
 		
 		if(partnership.id2 && partnership.id2!="*") {
-			tooltipPlayer.hide();
-			tooltipPartnership.show([
+			//tooltipPlayer.hide();
+			/*tooltipPartnership.show([
 					{
 						id:"partnershipRuns",
 						value:partnership.Runs
@@ -198,7 +198,7 @@ export default function PartnershipTimeline(_innings,options) {
 				xscale(partnership.ending_over*6),
 				d3_mean([partnership.order1,partnership.order2])*BAR,
 				partnership.player1+", "+partnership.player2
-			);
+			);*/
 		} else {
 			//console.log("---->",_innings)
 			var batter=_innings.batters.find(function(b){
@@ -207,7 +207,7 @@ export default function PartnershipTimeline(_innings,options) {
 			});
 			console.log("FOUND",batter)
 			
-			tooltipPartnership.hide();
+			/*tooltipPartnership.hide();
 			tooltipPlayer.show([
 					{
 						id:"playerRuns",
@@ -228,7 +228,7 @@ export default function PartnershipTimeline(_innings,options) {
 				],
 				xscale(batter.ending_balls),
 				batter.order*BAR
-			);
+			);*/
 		}
 
 		
@@ -337,7 +337,7 @@ export default function PartnershipTimeline(_innings,options) {
 			})
 			.attr("height",2);
 
-	var cross=player
+	/*var cross=player
 				.filter(function(d){
 					return d.status == "batted";
 				})
@@ -361,9 +361,9 @@ export default function PartnershipTimeline(_innings,options) {
 				return -y;
 			})
 			.attr("y2",function(d){
-				var y=svg.attr("height");//20;//EIGHT;// - (d.order-1)*BAR+margins.top;
+				var y=svg.attr("height");
 				return y;
-			})
+			})*/
 
 	
 	player
@@ -373,7 +373,7 @@ export default function PartnershipTimeline(_innings,options) {
 		.append("rect")
 		.attr("class","fall-of-wicket")
 		.attr("x",function(d){
-			return xscale(d.ending_balls)-1.5;
+			return xscale(d.ending_balls);
 		})
 		.attr("y",Math.ceil(BAR/2)-3)
 		.attr("width",2)
@@ -449,7 +449,7 @@ export default function PartnershipTimeline(_innings,options) {
 					return (Math.min(d.order1,d.order2)-1)*BAR + BAR/2;//0;//(d.Wkt)*27 - 27/2 + 6 - 1.5
 				})
 				.attr("width",function(d){
-					return Math.max(xscale(d.overs*6),2)
+					return Math.max(xscale(d.overs*6)+1,2)
 				})
 				.attr("height",function(d){
 					return Math.max(d.order2,d.order1)*BAR-BAR/2;
@@ -465,7 +465,7 @@ export default function PartnershipTimeline(_innings,options) {
 					return (Math.min(d.order1,d.order2)-1)*BAR + BAR/2;//0;//(d.Wkt)*27 - 27/2 + 6 - 1.5
 				})
 				.attr("width",function(d){
-					return Math.max(xscale(d.overs*6),2)
+					return Math.max(xscale(d.overs*6)+1,2)
 				})
 				.attr("height",function(d){
 					return Math.max(d.order2,d.order1)*BAR-BAR/2;
@@ -478,6 +478,11 @@ export default function PartnershipTimeline(_innings,options) {
 		
 		
 		return partnership;
+	}
+
+	this.highlightPartnershipIndex=(index)=>{
+
+		//highlightPartnership(partners.filter((d,i)=>(i===index)))
 	}
 
 	this.highlightPartnership=function(partnership) {

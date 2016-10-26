@@ -2,7 +2,7 @@
 
 	width:50%;
 	height:50px;
-	float: left;
+	float: right;
 
 	@include mq(tablet) {
 		float:left;
@@ -30,6 +30,12 @@
 				font-size: 11px;
 				text-anchor:end;
 				fill:#333;
+			}
+
+			&.highlight {
+				path.runs-bg {
+					fill-opacity:0.8;
+				}
 			}
 		}
 	}

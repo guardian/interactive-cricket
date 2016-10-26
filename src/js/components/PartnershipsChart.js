@@ -189,7 +189,7 @@ export default function PartnershipsChart(innings,options) {
 				.attr("x2",WIDTH)
 				.attr("y2",HEIGHT-0.5)
 
-	var partners=__innings.selectAll("g.partnership")
+	let partners=__innings.selectAll("g.partnership")
 				.data(function(d){
 					return d.value.innings.map(function(inn){
 						inn.prev_runs=d.value.starting_runs;
@@ -371,6 +371,9 @@ export default function PartnershipsChart(innings,options) {
 			options.callback(partnership);
 		}
 	};
+	
+	
+
 	this.doStuff=function(partnership) {
 		if(!partnership) {
 			highlightPartnership();

@@ -101,7 +101,9 @@ export default function scroller(els) {
    */
   function position() {
 
-    var pos = window.pageYOffset - 0 - containerStart;
+    var pos = window.pageYOffset + 50  - containerStart;
+
+    //console.log(pos)
 
     var sectionIndex = d3_bisect(sectionPositions, pos);
     sectionIndex = Math.min(sections.size() - 1, sectionIndex);
@@ -118,9 +120,10 @@ export default function scroller(els) {
     var prevTop = sectionPositions[prevIndex];
     var diff=(sectionPositions[sectionIndex] - prevTop)
     var progress = (pos - prevTop) / diff;
+    let local_y=(pos - prevTop);
     //console.log("(",pos,"-",prevTop,")","/","(",sectionPositions[sectionIndex],"-",prevTop,")")
     //console.log(sectionPositions)
-    dispatch.call("progress",this,currentIndex,progress);
+    dispatch.call("progress",this,currentIndex,progress,pos,local_y);
   }
 
   /**
@@ -138,6 +141,10 @@ export default function scroller(els) {
     container = value;
     return scroll;
   };
+
+  scroll.resize = function() {
+    resize();
+  }
 
   let d3_rebind = function(target, source) {
     var i = 1, n = arguments.length, method;
