@@ -27,6 +27,7 @@ window.init = function init(el, config) {
     //d3_json("http://localhost:8080/?match_id="+pa_ids[pa_index]).then((data)=>{
     //d3_json(config.assetPath+ "/assets/data/sample.json").then((data)=>{
     d3_json(config.assetPath+ "/assets/data/sample.json",(data)=>{
+    //d3_json("http://localhost:8080/?match_id="+pa_ids[pa_index],(data)=>{
     	console.log(data);
 
     	new CricketChart(data,{
@@ -39,3 +40,29 @@ window.init = function init(el, config) {
     })
 
 };
+
+if (!Array.prototype.find) {
+  Object.defineProperty(Array.prototype, "find", {
+    value: function(predicate) {
+     'use strict';
+     if (this == null) {
+       throw new TypeError('Array.prototype.find called on null or undefined');
+     }
+     if (typeof predicate !== 'function') {
+       throw new TypeError('predicate must be a function');
+     }
+     var list = Object(this);
+     var length = list.length >>> 0;
+     var thisArg = arguments[1];
+     var value;
+
+     for (var i = 0; i < length; i++) {
+       value = list[i];
+       if (predicate.call(thisArg, value, i, list)) {
+         return value;
+       }
+     }
+     return undefined;
+    }
+  });
+}

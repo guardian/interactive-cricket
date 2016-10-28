@@ -21,7 +21,7 @@ System.config({
   map: {
     "babel": "npm:babel-core@5.8.38",
     "babel-runtime": "npm:babel-runtime@5.8.38",
-    "core-js": "npm:core-js@1.2.6",
+    "core-js": "npm:core-js@1.2.7",
     "d3-array": "npm:d3-array@1.0.1",
     "d3-collection": "npm:d3-collection@1.0.1",
     "d3-dispatch": "npm:d3-dispatch@1.0.1",
@@ -103,7 +103,7 @@ System.config({
       "path": "github:jspm/nodelibs-path@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
-    "npm:core-js@1.2.6": {
+    "npm:core-js@1.2.7": {
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "path": "github:jspm/nodelibs-path@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2",
@@ -135,20 +135,20 @@ System.config({
       "d3-color": "npm:d3-color@1.0.1",
       "d3-format": "npm:d3-format@1.0.2",
       "d3-interpolate": "npm:d3-interpolate@1.1.1",
-      "d3-time": "npm:d3-time@1.0.2",
+      "d3-time": "npm:d3-time@1.0.4",
       "d3-time-format": "npm:d3-time-format@2.0.2"
     },
     "npm:d3-selection-multi@1.0.0": {
       "d3-selection": "npm:d3-selection@1.0.2",
-      "d3-transition": "npm:d3-transition@1.0.1"
+      "d3-transition": "npm:d3-transition@1.0.3"
     },
     "npm:d3-shape@1.0.3": {
-      "d3-path": "npm:d3-path@1.0.1"
+      "d3-path": "npm:d3-path@1.0.2"
     },
     "npm:d3-time-format@2.0.2": {
-      "d3-time": "npm:d3-time@1.0.2"
+      "d3-time": "npm:d3-time@1.0.4"
     },
-    "npm:d3-transition@1.0.1": {
+    "npm:d3-transition@1.0.3": {
       "d3-color": "npm:d3-color@1.0.1",
       "d3-dispatch": "npm:d3-dispatch@1.0.1",
       "d3-ease": "npm:d3-ease@1.0.1",

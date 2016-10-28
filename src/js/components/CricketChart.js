@@ -444,7 +444,7 @@ export default function CricketChart(data,options) {
 						index:i,
 						h:box.height
 					}
-				}).concat([{index:5,h:box.height*0.5}]))
+				}).concat([{index:5,h:box.height*0.5+50}]))
 				.enter()
 				.append("div")
 					.attr("class","inning")
@@ -460,6 +460,7 @@ export default function CricketChart(data,options) {
 		let current=-1;
 		let fixed=false;
 		let selected_partnership=-1;
+		let header_fixed=false;
 		scroll.on("active",function(index){
 			console.log(index);
 			smallchart.highlight(index-1);
@@ -502,7 +503,7 @@ export default function CricketChart(data,options) {
 
 		})
 		scroll.on("progress",function(index,progress,y,local_y){
-			//console.log(index,"==",current,"Y",progress,y,local_y,"fixed",fixed)
+			console.log(index,"==",current,"Y",progress,y,local_y,"fixed",fixed)
 
 			if(progress>=0 && progress<0.5 && !fixed && current!==index) {
 				console.log("##### 1")
@@ -511,7 +512,7 @@ export default function CricketChart(data,options) {
 				container
 					.select(".partnerships")
 					.classed("fixed",fixed)
-					.style("top",(-(index-1)*475)+"px")
+					.style("top",(-(index-1)*475+50)+"px")
 					.style("margin-top","0px")
 			}
 			if(progress>=0.5 && fixed) {
@@ -521,7 +522,7 @@ export default function CricketChart(data,options) {
 				container
 					.select(".partnerships")
 					.classed("fixed",fixed)
-					.style("margin-top",((index)*475)+"px")
+					.style("margin-top",((index)*475+50)+"px")
 					.style("top","0px")
 			}
 			if(progress<0.5 && !fixed && current===index) {
@@ -531,7 +532,7 @@ export default function CricketChart(data,options) {
 				container
 					.select(".partnerships")
 					.classed("fixed",fixed)
-					.style("top",(-(index-1)*475)+"px")
+					.style("top",(-(index-1)*475+50)+"px")
 					.style("margin-top","0px")	
 			}
 
@@ -546,6 +547,19 @@ export default function CricketChart(data,options) {
 					selected_partnership=value;
 					partnerships_timelines[index-1].highlightPartnership(partnership);
 				}
+			}
+
+			if(progress>-60 && !header_fixed) {
+				header_fixed=true;
+				matchAnalysis.classed("fixed",header_fixed)
+			}
+			if(progress<-60 && header_fixed) {
+				header_fixed=false;
+				matchAnalysis.classed("fixed",header_fixed)
+				fixed=false;
+				container
+					.select(".partnerships")
+					.classed("fixed",false)
 			}
 
 		})

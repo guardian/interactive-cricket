@@ -72,9 +72,10 @@
 			}
 			.performance {
 				position: absolute;
+				visibility: hidden;
 
 				div.scores {
-					display: none;
+					//display: none;
 					margin:0;
 					padding:0;
 					@include fs-textSans(1);
@@ -91,7 +92,7 @@
 
 				span {
 					margin-left:3px;
-					background-color: #ddd;
+					//background-color: #ddd;
 					padding:2px 5px;
 					line-height: 25px;
 					border-radius:4px;
@@ -118,6 +119,9 @@
 			h4 {
 				color:#333;
 				font-weight: bold;
+			}
+			div.performance {
+				visibility: visible;
 			}
 		}
 
