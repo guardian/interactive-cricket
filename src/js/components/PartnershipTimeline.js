@@ -8,6 +8,10 @@ import {
 	mean as d3_mean
 } from 'd3-array'
 
+import {
+	strokeShadow
+} from '../lib/CSSUtils'
+
 import Tooltip from './Tooltip'
 
 export default function PartnershipTimeline(_innings,options) {
@@ -128,6 +132,9 @@ export default function PartnershipTimeline(_innings,options) {
 	pic.append("h4")
 		.text(function(d){
 			return d.name;
+		})
+		.each(function(){
+			strokeShadow(this,1.5,"rgba(255,255,255,1)");
 		})
 
 	var performance=profile.append("div")

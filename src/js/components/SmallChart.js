@@ -39,7 +39,7 @@ export default function SmallChart(data,options) {
 		WIDTH=box.width;
 		HEIGHT=box.height;
 
-		console.log(options.container,box)
+		//console.log(options.container,box)
 		//return;
 
 		svg=select(options.container)
@@ -56,7 +56,7 @@ export default function SmallChart(data,options) {
 		innings=svg.append("g")
 						.attr("transform",`translate(${margins.left},${margins.top})`)
 						.selectAll("g.innings")
-							.data(data.innings)
+							.data(data.innings.filter(d=>d.value.balls))
 							.enter()
 							.append("g")
 								.attr("class",function(d){

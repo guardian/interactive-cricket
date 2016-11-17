@@ -139,8 +139,9 @@ export default function CricketChart(data,options) {
 				})
 				.entries(this.data.partnerships)
 
+
 		console.log(this.match.innings)
-		//return;
+		
 		this.match.innings.forEach((d,i) => {
 			let info=self.data.innings[i];
 			//console.log(d,info)
@@ -160,7 +161,7 @@ export default function CricketChart(data,options) {
 
 		})
 
-		if(this.match.innings.length<2) {
+		/*if(this.match.innings.length<2) {
 			//console.log("-------->",this.match)
 			this.match.innings.push({
 				key:"2",
@@ -175,16 +176,16 @@ export default function CricketChart(data,options) {
 					}).id
 				}
 			});
-		}
+		}*/
 
 		this.match.overall={
-			total_runs:d3_sum(this.match.innings,(d) => {
+			total_runs:d3_sum(this.match.innings.filter(d=>d.value.total_runs),(d) => {
 				return d.value.total_runs;
 			}),
-			total_balls:d3_sum(this.match.innings,(d) => {
+			total_balls:d3_sum(this.match.innings.filter(d=>d.value.balls),(d) => {
 				return d.value.balls;
 			}),
-			runs:d3_max(this.match.innings.map((d) => {
+			runs:d3_max(this.match.innings.filter(d=>d.value.balls).map((d) => {
 				return d.value.total_runs+d.value.starting_runs;
 			}))
 		}
@@ -257,7 +258,7 @@ export default function CricketChart(data,options) {
 
 	let _buildChart = () => {
 		let self=this;
-		let LEFT_PADDING=100,
+		let LEFT_PADDING=0,
 			RIGHT_PADDING=50,
 			SMALL_SIZE=false;
 		let container=select(this.options.container)
@@ -332,10 +333,8 @@ export default function CricketChart(data,options) {
 					})
 				})
 
-
-
-
 		//return;
+
 		let prev_team;
 		innings=container
 			.select(".partnerships")
@@ -464,46 +463,9 @@ export default function CricketChart(data,options) {
 		scroll.on("active",function(index){
 			console.log(index);
 			smallchart.highlight(index-1);
-			/*if(current!==index && index>0) {
-				current=index;
-				fixed=true;
-				container
-					.select(".partnerships")
-					.classed("fixed",true)
-					.style("top",(-(index-1)*475)+"px")
-					//.style("margin-top",0)
-
-				scroll.resize();
-			}*/
-			
-
-			// innings
-			// 	.filter((d,i)=>{
-			// 		return i==index-1;
-			// 	})
-			// 	.classed("active",true);
-
-			// innings
-			// 	.filter((d,i)=>{
-			// 		return i!=index-1;
-			// 	})
-			// 	.classed("active",false);
-
-			// innings
-			// 	.classed("active",(d,i)=>{
-			// 		return i<index-1;
-			// 	});
-			// innings
-			// 	.filter((d,i)=>{
-			// 		return i==index-2;
-			// 	})
-			// 	.classed("active",false)
-
-
-
 		})
 		scroll.on("progress",function(index,progress,y,local_y){
-			console.log(index,"==",current,"Y",progress,y,local_y,"fixed",fixed)
+			//console.log(index,"==",current,"Y",progress,y,local_y,"fixed",fixed)
 
 			if(progress>=0 && progress<0.5 && !fixed && current!==index) {
 				console.log("##### 1")

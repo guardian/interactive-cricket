@@ -24,9 +24,9 @@ window.init = function init(el, config) {
 
     let pa_index=pa_ids.length-1;
     
-    //d3_json("http://localhost:8080/?match_id="+pa_ids[pa_index]).then((data)=>{
+    d3_json("http://localhost:8080/?match_id="+pa_ids[pa_index],(data)=>{
     //d3_json(config.assetPath+ "/assets/data/sample.json").then((data)=>{
-    d3_json(config.assetPath+ "/assets/data/sample.json",(data)=>{
+    //d3_json(config.assetPath+ "/assets/data/sample.json",(data)=>{
     //d3_json("http://localhost:8080/?match_id="+pa_ids[pa_index],(data)=>{
     	console.log(data);
 

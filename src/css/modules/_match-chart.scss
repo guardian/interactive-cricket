@@ -22,6 +22,9 @@
 			width:100%;
 			display: inline-block;
 		//}
+		@include mq(tablet) {
+			border-bottom:none;
+		}
 		.match-title {
 			float:left;
 			//min-height: 50px;
