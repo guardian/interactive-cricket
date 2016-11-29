@@ -1,0 +1,23 @@
+#article {
+	div.content__main-column.content__main-column--interactive {
+		h2,p {
+			width:100%;
+			margin:0;
+			
+			@media (min-width: 61.25em) {
+				    margin-left: 0rem;
+				    max-width: 620px;
+			}
+
+			@media (min-width: 71.25em) {
+				    margin-left: 10rem;
+			}
+			
+			@media (min-width: 81.25em) {
+				    margin-left: 15rem;
+			}
+			
+			
+		}
+	}
+}

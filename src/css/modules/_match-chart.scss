@@ -3,6 +3,11 @@
 	overflow:hidden;
 
 	position:relative;
+	
+	@include mq(tablet) {
+		height:620px;
+	}
+
 
 	div.info {
 		@include fs-textSans(1);

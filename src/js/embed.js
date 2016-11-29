@@ -42,11 +42,11 @@ window.init = function init(el, config) {
     	console.log(data);
 
     	new CricketChart(data,{
-			container:el,
-			max_overs: d3_max(data.innings,function(d){return +d.overs}),
-			max_balls: d3_max(data.innings,function(d){return d.balls}),
-			min_runs: 200
-		});
+  			container:el,
+  			max_overs: d3_max(data.innings,function(d){return +d.overs}),
+  			max_balls: d3_max(data.innings,function(d){return d.balls}),
+  			min_runs: 200
+  		});
 
     })
 

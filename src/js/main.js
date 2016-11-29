@@ -1,9 +1,49 @@
 import mainHTML from './text/main.html!text'
 
+import {pa_ids} from '../assets/data/ids.js'
+
+import {
+  json as d3_json
+} from 'd3-request';
+
+import {
+  max as d3_max
+} from 'd3-array';
+
+import {
+  selection
+} from 'd3-selection-multi'
+
+import CricketChart from './components/CricketChart'
+
 export function init(el, context, config, mediator) {
     el.innerHTML = mainHTML.replace(/%assetPath%/g, config.assetPath);
 
+    let pa_index=pa_ids.length-1,
+        tid=pa_ids[pa_index];
+
+    //let param=getURLParameter("tid");
+    let param=el.getAttribute("data-alt");;
+
+    if(param) {
+      tid=param;
+    }
     
+    //d3_json("http://localhost:8080/?match_id="+tid,(data)=>{
+    //d3_json(`${config.assetPath}/assets/data/${tid}.json`).then((data)=>{
+    d3_json(`${config.assetPath}/assets/data/${tid}.json`,(data)=>{
+    //d3_json("http://localhost:8080/?match_id="+pa_ids[pa_index],(data)=>{
+      console.log(data);
+
+      new CricketChart(data,{
+        container:el,
+        max_overs: d3_max(data.innings,function(d){return +d.overs}),
+        max_balls: d3_max(data.innings,function(d){return d.balls}),
+        min_runs: 200
+      });
+
+    })
+
 }
 
 if (!Array.prototype.find) {
