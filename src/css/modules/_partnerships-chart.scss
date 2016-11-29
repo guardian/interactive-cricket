@@ -49,6 +49,12 @@
 		//font-size:16px;
 		//line-height: 18px;
 		color:colour(neutral-1);
+
+		span {
+			@include fs-textSans(1);
+			color:colour(neutral-2);
+			font-weight: normal;
+		}
 	}
 	h3 {
 		@include fs-textSans(1);
@@ -196,7 +202,7 @@
 		}
 		rect {
 			stroke:none;
-			fill:#333;
+			fill:#999;
 			fill-opacity:0.6;
 		}
 	}
@@ -218,8 +224,9 @@
 	g.target-runs {
 		line {
 			stroke:#333;
-			stroke-dasharray: 2,2;
+			stroke-dasharray: 1,4;
 			stroke-width:1;
+			shape-rendering: crispEdges;
 		}
 	}
 }

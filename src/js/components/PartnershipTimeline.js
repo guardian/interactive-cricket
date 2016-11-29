@@ -131,7 +131,7 @@ export default function PartnershipTimeline(_innings,options) {
 
 	pic.append("h4")
 		.text(function(d){
-			return d.name;
+			return d.info.name;
 		})
 		.each(function(){
 			strokeShadow(this,1.5,"rgba(255,255,255,1)");

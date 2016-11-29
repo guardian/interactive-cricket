@@ -15,6 +15,10 @@ import {
 	selection
 } from 'd3-selection-multi'
 
+import {
+  getURLParameter
+} from './lib/utils'
+
 import CricketChart from './components/CricketChart'
 
 window.init = function init(el, config) {
@@ -22,11 +26,18 @@ window.init = function init(el, config) {
 
     el.innerHTML = embedHTML;
 
-    let pa_index=pa_ids.length-1;
+    let pa_index=pa_ids.length-1,
+        tid=pa_ids[pa_index];
+
+    let param=getURLParameter("tid");
+
+    if(param) {
+      tid=param;
+    }
     
-    d3_json("http://localhost:8080/?match_id="+pa_ids[pa_index],(data)=>{
-    //d3_json(config.assetPath+ "/assets/data/sample.json").then((data)=>{
-    //d3_json(config.assetPath+ "/assets/data/sample.json",(data)=>{
+    //d3_json("http://localhost:8080/?match_id="+tid,(data)=>{
+    //d3_json(`${config.assetPath}/assets/data/${tid}.json`).then((data)=>{
+    d3_json(`${config.assetPath}/assets/data/${tid}.json`,(data)=>{
     //d3_json("http://localhost:8080/?match_id="+pa_ids[pa_index],(data)=>{
     	console.log(data);
 

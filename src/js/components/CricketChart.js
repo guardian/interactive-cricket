@@ -271,7 +271,10 @@ export default function CricketChart(data,options) {
 		let box=container.node().getBoundingClientRect();
 		let WIDTH=box.width-(LEFT_PADDING+RIGHT_PADDING);//*this.data.innings.length-30*this.data.innings.length;
 
+		WIDTH=WIDTH/(4/data.innings.length)
+
 		console.log("WIDTH",WIDTH)
+
 
 		//WIDTH=box.width;
 
@@ -321,7 +324,10 @@ export default function CricketChart(data,options) {
 				summary.select("h2")
 							.html(`${data.result.winner.name} won by ${data.result.margin} ${data.result.type}`)	
 			}
-			
+		} else {
+			if(data.status) {
+				summary.select("h2").classed("status",true).html(data.status);
+			}
 		}
 		
 		summary.select("div.small-chart")

@@ -57,10 +57,11 @@ export default function PartnershipsChart(innings,options) {
 						.attr("class","innings-title")
 	inningsTitle
 		.append("h2")
-		.text(function(){
-			////console.log(innings);
-			//console.log("TEAM_ID",options.team_id)
-			return options.getTeamInfo(options.team_id).name;//options.teams[innings.value.team];
+		.html(function(){
+			let inns=innings.key<3?1:2,
+				inns_text=inns+(inns===1?"st":"nd")+" innings";
+			
+			return `${options.getTeamInfo(options.team_id).name} <span>${inns_text}</span>`;
 		})
 	
 	inningsTitle
@@ -74,12 +75,12 @@ export default function PartnershipsChart(innings,options) {
 			return innings.value.total_runs+(wickets<10?(" - "+wickets):" all out");
 		})
 
-	inningsTitle
+	/*inningsTitle
 		.append("h3")
 		.text(function(){
 			var inns=innings.key<3?1:2;
 			return inns+(inns===1?"st":"nd")+" Innings";
-		})
+		})*/
 
 
 	

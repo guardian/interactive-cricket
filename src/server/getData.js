@@ -276,6 +276,7 @@ function getScorecard(match_id,callback) {
 			return {
 				name:name[name.length-1].toLowerCase(),
 				id:b.player.id,
+				info:b.player,
 				order:+b.order,
 				overs:+b.statistic.find(function(d){return d.type=="overs"}).value,
 				balls:+b.statistic.find(function(d){return d.type=="balls"}).value,
@@ -296,6 +297,7 @@ function getScorecard(match_id,callback) {
 			return {
 				name:name[name.length-1].toLowerCase(),
 				id:b.player.id,
+				info:b.player,
 				order:+b.order,
 				status:b.status,
 				runs:+b.statistic.find(function(d){return d.type=="runs-scored"}).value,
@@ -507,6 +509,9 @@ function getScorecard(match_id,callback) {
 				stage:match.stage,
 				round:match.round,
 				venue:match.venue.name,
+				status:match.status,
+				currentDay: match.currentDay,
+      			totalDays: match.totalDays,
 				max_overs:fixes[match_id]?fixes[match_id][0].max_overs:20,
 				result:match.result?{
 					type:match.result.type==='draw'?'draw':match.result.winner.type,
